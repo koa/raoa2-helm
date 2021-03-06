@@ -38,6 +38,16 @@ spec:
             - sh
             - -c
             - find /data -name .probe-* -print0 | xargs -0 -n 1 -r rm
+        - name: fix-permissions
+          image: library/busybox:1.32.0
+          volumeMounts:
+            - mountPath: /data
+              name: data
+          command:
+            - chown
+            - -R
+            - 1000:1000
+            - /data
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
