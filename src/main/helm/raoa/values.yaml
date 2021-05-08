@@ -69,6 +69,7 @@ ingress:
 data:
   repository:
     override: false
+    initStorage: true
   cache:
     size: 10Gi
   elasticsearch:

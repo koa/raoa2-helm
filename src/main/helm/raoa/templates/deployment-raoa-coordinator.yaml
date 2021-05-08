@@ -38,6 +38,7 @@ spec:
             - sh
             - -c
             - find /data -name .probe-* -print0 | xargs -0 -n 1 -r rm
+        {{ if .Values.data.repository.initStorage}}
         - name: fix-permissions
           image: library/busybox:1.32.0
           volumeMounts:
@@ -48,6 +49,7 @@ spec:
             - -R
             - 1000:1000
             - /data
+        {{ end }}
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
