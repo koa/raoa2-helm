@@ -41,7 +41,6 @@
                     <chartName>raoa</chartName>
                     <chartVersion>${project.version}</chartVersion>
                     <helmVersion>3.4.2</helmVersion>
-                    <chartRepoUrl>https://nexus.berg-turbenthal.ch/repository/helm-snapshot</chartRepoUrl>
                     <addIncubatorRepo>false</addIncubatorRepo>
                     <chartPublishMethod>PUT</chartPublishMethod>
                     <chartPublishUrl>https://nexus.berg-turbenthal.ch/repository/helm-snapshot/raoa-${project.version}.tgz</chartPublishUrl>

@@ -1,3 +1,4 @@
+{{ if .Values.importer.enabled}}
 apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
@@ -47,3 +48,4 @@ spec:
               hostPath:
                 path: /media
           restartPolicy: OnFailure
+{{ end }}

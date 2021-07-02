@@ -51,7 +51,19 @@ security:
   googleClientSecret: set google secret here
 monitoring:
   enabled: true
-
+importer:
+  enabled: false
+repack:
+  enabled: true
+  image: docker.io/alpine/git:v2.30.2
+  schedule: '21 * * * *'
+  resources:
+    limits:
+      cpu: "16"
+      memory: 4Gi
+    requests:
+      cpu: "1"
+      memory: 512Mi
 ingress:
   enabled: false
   annotations: {}
