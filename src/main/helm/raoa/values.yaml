@@ -8,6 +8,7 @@ image:
   viewerRepository: docker.berg-turbenthal.ch/raoa-viewer
   coordinatorRepository: docker.berg-turbenthal.ch/raoa-job-koordinator
   imageProcessorRepository: docker.berg-turbenthal.ch/raoa-image-processor
+  mediaProcessorRepository: docker.berg-turbenthal.ch/raoa-media-processor
   importerRepository: docker.berg-turbenthal.ch/raoa-importer
   pullPolicy: IfNotPresent
   version: 20200301-185904

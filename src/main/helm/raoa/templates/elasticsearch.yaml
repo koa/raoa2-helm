@@ -1,9 +1,9 @@
-apiVersion: elasticsearch.k8s.elastic.co/v1beta1
+apiVersion: elasticsearch.k8s.elastic.co/v1
 kind: Elasticsearch
 metadata:
   name: {{ include "raoa.fullname" . }}
 spec:
-  version: 7.6.0
+  version: 7.14.0
   updateStrategy:
     changeBudget:
       maxSurge: 3
@@ -11,13 +11,11 @@ spec:
   nodeSets:
     - name: data
       count: {{.Values.data.elasticsearch.nodeCount}}
+      config:
+        node.roles: ["master","data","ingest"]
+        xpack.ml.enabled: false
       {{ if .Values.data.elasticsearch.volumesOverride }}
       volumeClaimTemplates:
         {{- toYaml .Values.data.elasticsearch.volumes | nindent 8 }}
       {{ end }}
-      config:
-        node.master: true
-        node.data: true
-        node.ingest: true
-        xpack.ml.enabled: false
 
