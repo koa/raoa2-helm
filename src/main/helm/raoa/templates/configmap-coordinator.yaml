@@ -58,10 +58,7 @@ data:
                     value: /dumps
                    {{ if .Values.debug.enabled}}
                   - name: JAVA_TOOL_OPTIONS
-                    value: {{ printf "-Djdk.tls.client.protocols=TLSv1.2 -agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=localhost:%i" .Values.debug.port | quote}}
-                   {{ else}}
-                  - name: JAVA_TOOL_OPTIONS
-                    value: -Djdk.tls.client.protocols=TLSv1.2
+                    value: {{ printf "-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=localhost:%i" .Values.debug.port | quote}}
                    {{ end}}
                   - name: SPRING_DATA_ELASTICSEARCH_CLIENT_REACTIVE_PASSWORD
                     valueFrom:
