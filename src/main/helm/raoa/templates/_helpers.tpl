@@ -109,6 +109,9 @@ raoa.repository: /data
 raoa.thumbnailDir: /cache
 raoa.max-concurrent: "20"
 server.use-forward-headers: "true"
+spring.elasticsearch.uris: {{ include "raoa.fullname" . }}-es-http:9200
+spring.elasticsearch.username: elastic
+spring.elasticsearch.socket-timeout: 1m
 spring.data.elasticsearch.client.reactive.endpoints: {{ include "raoa.fullname" . }}-es-http:9200
 spring.data.elasticsearch.client.reactive.useSsl: "true"
 spring.data.elasticsearch.client.reactive.username: elastic
