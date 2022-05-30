@@ -74,6 +74,7 @@ ingress:
     # kubernetes.io/tls-acme: "true"
   createCertificate: true
   host: photos.example.com
+  className: undefined
   issuerRef:
     name: letsencrypt-prod
     kind: ClusterIssuer
