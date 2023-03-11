@@ -146,6 +146,7 @@ spec:
         - name: dumps
           emptyDir: {}
         - name: ca
-          secret: {{ include "raoa.fullname" . }}-es-remote-ca
+          secret:
+            secretName: {{ include "raoa.fullname" . }}-es-remote-ca
         - name: security
           emptyDir: {}
