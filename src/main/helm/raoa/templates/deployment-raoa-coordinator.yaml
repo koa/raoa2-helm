@@ -60,7 +60,7 @@ spec:
           command:
             - bash
             - -c
-            - 'cp /opt/java/openjdk/lib/security /security && keytool -import -trustcacerts -keystore /security/cacerts -storepass changeit -noprompt -alias el-ca -file /ca/ca.crt'
+            - 'cp /opt/java/openjdk/lib/security/* /security && keytool -import -trustcacerts -keystore /security/cacerts -storepass changeit -noprompt -alias el-ca -file /ca/ca.crt'
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
