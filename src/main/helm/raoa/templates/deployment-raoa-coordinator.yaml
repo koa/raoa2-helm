@@ -50,6 +50,17 @@ spec:
             - 1000:1000
             - /data
         {{ end }}
+        - name: import-ca-certs
+          image: eclipse-temurin:17-jre
+          volumeMounts:
+            - mountPath: /ca
+              name: ca
+            - mountPath: /security
+              name: security
+          command:
+            - bash
+            - -c
+            - 'cp /opt/java/openjdk/lib/security /security && keytool -import -trustcacerts -keystore /security/cacerts -storepass changeit -noprompt -alias el-ca -file /ca/ca.crt'
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
@@ -111,6 +122,8 @@ spec:
               name: data
             - mountPath: /dumps
               name: dumps
+            - mountPath: /opt/java/openjdk/lib/security
+              name: security
           resources:
             {{- toYaml .Values.coordinatorResources | nindent 12 }}
       {{ with .Values.affinity }}
@@ -131,4 +144,8 @@ spec:
         - name: shared-cache
           {{- include "raoa.cacheVolume" . | nindent 10 }}
         - name: dumps
+          emptyDir: {}
+        - name: ca
+          secret: {{ include "raoa.fullname" . }}-es-remote-ca
+        - name: security
           emptyDir: {}
