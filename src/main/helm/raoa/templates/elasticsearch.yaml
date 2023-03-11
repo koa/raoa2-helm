@@ -3,7 +3,7 @@ kind: Elasticsearch
 metadata:
   name: {{ include "raoa.fullname" . }}
 spec:
-  version:  8.6.2
+  version: 7.17.9
   updateStrategy:
     changeBudget:
       maxSurge: 3
