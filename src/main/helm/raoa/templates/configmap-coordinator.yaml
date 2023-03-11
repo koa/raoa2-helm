@@ -99,8 +99,22 @@ data:
                     name: data
                   - mountPath: /dumps
                     name: dumps
+                  - mountPath: /opt/java/openjdk/lib/security
+                    name: security
                 resources:
                   {{- toYaml .Values.processorResources | nindent 18 }}
+            initContainers:
+            - name: import-ca-certs
+              image: eclipse-temurin:17-jre
+              volumeMounts:
+                - mountPath: /ca
+                  name: ca
+                - mountPath: /security
+                  name: security
+              command:
+                - bash
+                - -c
+                - 'cp /opt/java/openjdk/lib/security/* /security && keytool -import -trustcacerts -keystore /security/cacerts -storepass changeit -noprompt -alias el-ca -file /ca/ca.crt'
             {{ with .Values.affinity }}
             affinity:
             {{- toYaml . | nindent 14 }}
@@ -120,4 +134,9 @@ data:
                 {{- include "raoa.cacheVolume" . | nindent 16 }}
               - emptyDir: { }
                 name: dumps
+              - name: ca
+                secret:
+                  secretName: {{ include "raoa.fullname" . }}-es-remote-ca
+              - name: security
+                emptyDir: {}
 
