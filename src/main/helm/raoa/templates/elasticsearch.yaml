@@ -14,10 +14,6 @@ spec:
       config:
         node.roles: ["master","data","ingest"]
         xpack.ml.enabled: false
-      {{ if .Values.data.elasticsearch.volumesOverride }}
-      volumeClaimTemplates:
-        {{- toYaml .Values.data.elasticsearch.volumes | nindent 8 }}
-      {{ end }}
       podTemplate:
         spec:
           initContainers:
@@ -26,4 +22,7 @@ spec:
                 privileged: true
                 runAsUser: 0
               command: [ 'sh', '-c', 'sysctl -w vm.max_map_count=262144' ]
-
+          {{ if .Values.data.elasticsearch.volumesOverride }}
+          volumes:
+            {{- toYaml .Values.data.elasticsearch.volumes | nindent 12 }}
+          {{ end }}
