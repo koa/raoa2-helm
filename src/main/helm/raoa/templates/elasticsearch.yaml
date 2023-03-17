@@ -23,8 +23,9 @@ spec:
                 runAsUser: 0
               command: [ 'sh', '-c', 'sysctl -w vm.max_map_count=262144' ]
           containers:
-            capabilities:
-              add: ["SYS_CHROOT"]
+            - name: elasticsearch
+              capabilities:
+                add: ["SYS_CHROOT"]
           {{ if .Values.data.elasticsearch.volumesOverride }}
           volumes:
             {{- toYaml .Values.data.elasticsearch.volumes | nindent 12 }}
