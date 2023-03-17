@@ -87,7 +87,7 @@ data:
                     valueFrom:
                       secretKeyRef:
                         key: elastic
-                        name: raoa-es-elastic-user
+                        name: {{ include "raoa.fullname" . }}-es-elastic-user
                   - name: RAOA_JOB_REPOSITORY
                     value: $repoId$
                   - name: RAOA_JOB_FILES
