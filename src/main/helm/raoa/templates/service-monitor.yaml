@@ -4,7 +4,8 @@ kind: ServiceMonitor
 metadata:
   name: {{ include "raoa.fullname" . }}
   labels:
-  {{- include "raoa.labels" . | nindent 4 }}
+    {{- include "raoa.labels" . | nindent 4 }}
+    release: monitoring
 spec:
   selector:
     matchLabels:
