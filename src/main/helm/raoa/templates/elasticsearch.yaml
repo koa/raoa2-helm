@@ -11,6 +11,8 @@ spec:
   nodeSets:
     - name: data
       count: {{.Values.data.elasticsearch.nodeCount}}
+      config:
+        xpack.ml.enabled: false
       podTemplate:
         spec:
           initContainers:
